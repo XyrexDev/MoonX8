@@ -17,7 +17,7 @@ local preloadImage = Instance.new("ImageLabel", preloadFrame)
 preloadImage.Size = UDim2.new(0, 300, 0, 300)
 preloadImage.Position = UDim2.new(0.5, -150, 0.5, -150)
 preloadImage.BackgroundTransparency = 1
-preloadImage.Image = "rbxassetid://86854480214664" -- Replace with your texture ID
+preloadImage.Image = "rbxassetid://126385674638127" -- Replace with your texture ID
 preloadImage.ImageTransparency = 1
 
 -- Add rounded corners to preload image
