@@ -1,155 +1,171 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+-- Enhanced Key System GUI with improved design and animations
+local TweenService = game:GetService("TweenService")
 
-local Window = Rayfield:CreateWindow({
-   Name = "🔥 Example Script Hub | Game 🔫",
-   LoadingTitle = "🔫 Gun Simulator 💥",
-   LoadingSubtitle = "by 1_F0",
-   ConfigurationSaving = {
-      Enabled = false,
-      FolderName = nil, -- Create a custom folder for your hub/game
-      FileName = "Example Hub"
-   },
-   Discord = {
-      Enabled = false,
-      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
-   },
-   KeySystem = true, -- Set this to true to use our key system
-   KeySettings = {
-      Title = "Key | Youtube Hub",
-      Subtitle = "Key System",
-      Note = "Key In Discord Server",
-      FileName = "YoutubeHubKey1", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"https://pastebin.com/raw/AtgzSPWK"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
-   }
-})
+-- Create main GUI
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "KeySystemUI"
 
-local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
-local MainSection = MainTab:CreateSection("Main")
+-- Main frame (larger and centered)
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 400, 0, 220)
+frame.Position = UDim2.new(0.5, -200, 0.5, -110)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+frame.BorderSizePixel = 0
+frame.BackgroundTransparency = 1 -- Start invisible for animation
 
-Rayfield:Notify({
-   Title = "You executed the script",
-   Content = "Very cool gui",
-   Duration = 5,
-   Image = 13047715178,
-   Actions = { -- Notification Buttons
-      Ignore = {
-         Name = "Okay!",
-         Callback = function()
-         print("The user tapped Okay!")
-      end
-   },
-},
-})
+-- Add rounded corners to main frame
+local frameCorner = Instance.new("UICorner", frame)
+frameCorner.CornerRadius = UDim.new(0, 12)
 
-local Button = MainTab:CreateButton({
-   Name = "Infinite Jump Toggle",
-   Callback = function()
-       --Toggles the infinite jump between on or off on every script run
-_G.infinjump = not _G.infinjump
+-- Add subtle drop shadow effect
+local shadow = Instance.new("Frame", gui)
+shadow.Size = frame.Size
+shadow.Position = UDim2.new(0.5, -198, 0.5, -108)
+shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+shadow.BackgroundTransparency = 0.8
+shadow.BorderSizePixel = 0
+shadow.ZIndex = frame.ZIndex - 1
+shadow.BackgroundTransparency = 1 -- Start invisible
 
-if _G.infinJumpStarted == nil then
-	--Ensures this only runs once to save resources
-	_G.infinJumpStarted = true
-	
-	--Notifies readiness
-	game.StarterGui:SetCore("SendNotification", {Title="Youtube Hub"; Text="Infinite Jump Activated!"; Duration=5;})
+local shadowCorner = Instance.new("UICorner", shadow)
+shadowCorner.CornerRadius = UDim.new(0, 12)
 
-	--The actual infinite jump
-	local plr = game:GetService('Players').LocalPlayer
-	local m = plr:GetMouse()
-	m.KeyDown:connect(function(k)
-		if _G.infinjump then
-			if k:byte() == 32 then
-			humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
-			humanoid:ChangeState('Jumping')
-			wait()
-			humanoid:ChangeState('Seated')
-			end
-		end
-	end)
+-- Title label (better positioned and styled)
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, -40, 0, 40)
+title.Position = UDim2.new(0, 20, 0, 15)
+title.BackgroundTransparency = 1
+title.Text = "MoonX 🌙 | Copy Key to Clipboard"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 20
+title.TextXAlignment = Enum.TextXAlignment.Center
+
+-- Get Key button (improved styling and positioning)
+local getKeyBtn = Instance.new("TextButton", frame)
+getKeyBtn.Size = UDim2.new(1, -40, 0, 35)
+getKeyBtn.Position = UDim2.new(0, 20, 0, 65)
+getKeyBtn.Text = "Get Key"
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyBtn.Font = Enum.Font.SourceSansBold
+getKeyBtn.TextSize = 16
+getKeyBtn.BorderSizePixel = 0
+
+-- Rounded corners for Get Key button
+local getKeyCorner = Instance.new("UICorner", getKeyBtn)
+getKeyCorner.CornerRadius = UDim.new(0, 8)
+
+-- Key input box (improved styling)
+local keyBox = Instance.new("TextBox", frame)
+keyBox.Size = UDim2.new(1, -40, 0, 35)
+keyBox.Position = UDim2.new(0, 20, 0, 110)
+keyBox.PlaceholderText = "Enter MoonX key here..."
+keyBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.Font = Enum.Font.SourceSans
+keyBox.TextSize = 14
+keyBox.BorderSizePixel = 0
+keyBox.ClearTextOnFocus = false
+
+-- Rounded corners for text box
+local keyBoxCorner = Instance.new("UICorner", keyBox)
+keyBoxCorner.CornerRadius = UDim.new(0, 8)
+
+-- Submit button (improved styling)
+local submitBtn = Instance.new("TextButton", frame)
+submitBtn.Size = UDim2.new(1, -40, 0, 35)
+submitBtn.Position = UDim2.new(0, 20, 0, 155)
+submitBtn.Text = "Submit Key"
+submitBtn.BackgroundColor3 = Color3.fromRGB(60, 150, 60)
+submitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+submitBtn.Font = Enum.Font.SourceSansBold
+submitBtn.TextSize = 16
+submitBtn.BorderSizePixel = 0
+
+-- Rounded corners for submit button
+local submitCorner = Instance.new("UICorner", submitBtn)
+submitCorner.CornerRadius = UDim.new(0, 8)
+
+-- Button hover effects
+local function createHoverEffect(button, hoverColor, originalColor)
+    button.MouseEnter:Connect(function()
+        local hoverTween = TweenService:Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = hoverColor}
+        )
+        hoverTween:Play()
+    end)
+    
+    button.MouseLeave:Connect(function()
+        local leaveTween = TweenService:Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = originalColor}
+        )
+        leaveTween:Play()
+    end)
 end
-   end,
-})
 
-local Slider = MainTab:CreateSlider({
-   Name = "WalkSpeed Slider",
-   Range = {1, 350},
-   Increment = 1,
-   Suffix = "Speed",
-   CurrentValue = 16,
-   Flag = "sliderws", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
-   end,
-})
+-- Apply hover effects
+createHoverEffect(getKeyBtn, Color3.fromRGB(90, 150, 200), Color3.fromRGB(70, 130, 180))
+createHoverEffect(submitBtn, Color3.fromRGB(80, 170, 80), Color3.fromRGB(60, 150, 60))
 
-local Slider = MainTab:CreateSlider({
-   Name = "JumpPower Slider",
-   Range = {1, 350},
-   Increment = 1,
-   Suffix = "Speed",
-   CurrentValue = 16,
-   Flag = "sliderjp", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
-   end,
-})
+-- Button functionality
+getKeyBtn.MouseButton1Click:Connect(function()
+    setclipboard("https://lootdest.org/s?Si1CYuYP")
+    
+    -- Visual feedback
+    local originalText = getKeyBtn.Text
+    getKeyBtn.Text = "Copied!"
+    wait(1)
+    getKeyBtn.Text = originalText
+end)
 
-local Dropdown = MainTab:CreateDropdown({
-   Name = "Select Area",
-   Options = {"Starter World","Pirate Island","Pineapple Paradise"},
-   CurrentOption = {"Starter World"},
-   MultipleOptions = false,
-   Flag = "dropdownarea", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Option)
-        print(Option)
-   end,
-})
+submitBtn.MouseButton1Click:Connect(function()
+    local key = keyBox.Text
+    -- Replace this with your actual key check
+    print("Submitted key:", key)
+    
+    -- Visual feedback
+    local originalText = submitBtn.Text
+    submitBtn.Text = "Submitted!"
+    wait(1)
+    submitBtn.Text = originalText
+end)
 
-local Input = MainTab:CreateInput({
-   Name = "Walkspeed",
-   PlaceholderText = "1-500",
-   RemoveTextAfterFocusLost = true,
-   Callback = function(Text)
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Text)
-   end,
-})
+-- Fade-in animation
+local fadeInTween = TweenService:Create(
+    frame,
+    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    {BackgroundTransparency = 0}
+)
 
-local OtherSection = MainTab:CreateSection("Other")
+local shadowFadeIn = TweenService:Create(
+    shadow,
+    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    {BackgroundTransparency = 0.8}
+)
 
-local Toggle = MainTab:CreateToggle({
-   Name = "Auto Farm",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-        print("FARMING")
-   end,
-})
+-- Scale animation (starts small and grows)
+frame.Size = UDim2.new(0, 0, 0, 0)
+local scaleInTween = TweenService:Create(
+    frame,
+    TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Size = UDim2.new(0, 400, 0, 220)}
+)
 
-local TPTab = Window:CreateTab("🏝 Teleports", nil) -- Title, Image
+shadow.Size = UDim2.new(0, 0, 0, 0)
+local shadowScaleTween = TweenService:Create(
+    shadow,
+    TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Size = UDim2.new(0, 400, 0, 220)}
+)
 
-local Button1 = TPTab:CreateButton({
-   Name = "Starter Island",
-   Callback = function()
-        --Teleport1
-   end,
-})
-
-local Button2 = TPTab:CreateButton({
-   Name = "Pirate Island",
-   Callback = function()
-        --Teleport2
-   end,
-})
-
-local Button3 = TPTab:CreateButton({
-   Name = "Pineapple Paradise",
-   Callback = function()
-        --Teleport3
-   end,
-})
-
-local TPTab = Window:CreateTab("🎲 Misc", nil) -- Title, Image
+-- Play animations
+fadeInTween:Play()
+shadowFadeIn:Play()
+scaleInTween:Play()
+shadowScaleTween:Play()
