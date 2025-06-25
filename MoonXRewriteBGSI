@@ -109,7 +109,7 @@ getKeyBtn.MouseButton1Click:Connect(function()
 	setclipboard("https://lootdest.org/s?Si1CYuYP")
 end)
 
-local keyBox = Instance.new("Enter MoonX key here...", frame)
+local keyBox = Instance.new("TextBox", frame)
 keyBox.Size = UDim2.new(1, -20, 0, 30)
 keyBox.Position = UDim2.new(0, 10, 0, 80)
 keyBox.PlaceholderText = "Enter MoonX key here..."
