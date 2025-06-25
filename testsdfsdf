@@ -17,7 +17,7 @@ frame.BorderSizePixel = 0
 local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, 0, 0, 30)
 title.BackgroundTransparency = 1
-title.Text = "MoonX 🌙 | Copy Key to Clipboard. "
+title.Text = "MoonX 🌙 | Copy Key to Clipboard."
 title.TextColor3 = Color3.new(1, 1, 1)
 title.Font = Enum.Font.SourceSansBold
 title.TextSize = 22
@@ -36,7 +36,7 @@ getKeyBtn.MouseButton1Click:Connect(function()
 	setclipboard("https://lootdest.org/s?Si1CYuYP")
 end)
 
-local keyBox = Instance.new("TextBox", frame)
+local keyBox = Instance.new("Enter MoonX key here...", frame)
 keyBox.Size = UDim2.new(1, -20, 0, 30)
 keyBox.Position = UDim2.new(0, 10, 0, 80)
 keyBox.PlaceholderText = "Enter MoonX key here..."
