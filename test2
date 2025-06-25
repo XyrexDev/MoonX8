@@ -1,49 +1,195 @@
-local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/Its3rr0rsWRLD/Rayfield/refs/heads/main/source.lua'))()
+-- Enhanced Key System GUI with improved design and animations
+local TweenService = game:GetService("TweenService")
 
+-- Create main GUI
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "KeySystemUI"
 
-local Window = Rayfield:CreateWindow({
-   Name = "Toon X Rewrite 🌙 | BGSI",
-   Icon = 126385674638127, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
-   LoadingTitle = "ToonX Rewrite",
-   LoadingSubtitle = "by XyrexDev | 2025",
-   ShowText = "Rayfield", -- for mobile users to unhide rayfield, change if you'd like
-   Theme = "Bloom", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+-- Main frame (larger and centered)
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 400, 0, 220)
+frame.Position = UDim2.new(0.5, -200, 0.5, -110)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+frame.BorderSizePixel = 0
+frame.BackgroundTransparency = 1 -- Start invisible for animation
 
-   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+-- Add rounded corners to main frame
+local frameCorner = Instance.new("UICorner", frame)
+frameCorner.CornerRadius = UDim.new(0, 12)
 
-   DisableRayfieldPrompts = false,
-   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+-- Add subtle drop shadow effect
+local shadow = Instance.new("Frame", gui)
+shadow.Size = frame.Size
+shadow.Position = UDim2.new(0.5, -198, 0.5, -108)
+shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+shadow.BackgroundTransparency = 0.8
+shadow.BorderSizePixel = 0
+shadow.ZIndex = frame.ZIndex - 1
+shadow.BackgroundTransparency = 1 -- Start invisible
 
-   ConfigurationSaving = {
-      Enabled = false,
-      FolderName = nil, -- Create a custom folder for your hub/game
-      FileName = "Toon"
-   },
+local shadowCorner = Instance.new("UICorner", shadow)
+shadowCorner.CornerRadius = UDim.new(0, 12)
 
-   Discord = {
-      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
-      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
-      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
-   },
+-- Title label (better positioned and styled)
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, -40, 0, 40)
+title.Position = UDim2.new(0, 20, 0, 15)
+title.BackgroundTransparency = 1
+title.Text = "MoonX 🌙 | Copy Key to Clipboard"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 20
+title.TextXAlignment = Enum.TextXAlignment.Center
 
-   KeySystem = true, -- Set this to true to use our key system
-   KeySettings = {
-      Title = "ToonX Rewrite | Key",
-      Subtitle = "Lootlabs Link",
-      Note = "The link has been copied to your keyboard.", -- Use this to tell the user how to get a key
-      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"Zkx834M3Dka903AliHAN8267.Xyrex"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
-   }
-})
+-- Get Key button (improved styling and positioning)
+local getKeyBtn = Instance.new("TextButton", frame)
+getKeyBtn.Size = UDim2.new(1, -40, 0, 35)
+getKeyBtn.Position = UDim2.new(0, 20, 0, 65)
+getKeyBtn.Text = "Get Key"
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyBtn.Font = Enum.Font.SourceSansBold
+getKeyBtn.TextSize = 16
+getKeyBtn.BorderSizePixel = 0
 
-local Tab = Window:CreateTab("Main", nil) -- Title, Image
-local MainSection = Tab:CreateSection("Main")
+-- Rounded corners for Get Key button
+local getKeyCorner = Instance.new("UICorner", getKeyBtn)
+getKeyCorner.CornerRadius = UDim.new(0, 8)
 
-Rayfield:Notify({
-   Title = "ToonX Rewrite",
-       Content = "Welcome to ToonX Rewrite! We hope you can make use of our free version.",
-   Duration = 5,
-   Image = nil,
-})
+-- Key input box (improved styling, no default text)
+local keyBox = Instance.new("TextBox", frame)
+keyBox.Size = UDim2.new(1, -40, 0, 35)
+keyBox.Position = UDim2.new(0, 20, 0, 110)
+keyBox.Text = "" -- Start with empty text
+keyBox.PlaceholderText = "Enter MoonX key here..."
+keyBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.Font = Enum.Font.SourceSans
+keyBox.TextSize = 14
+keyBox.BorderSizePixel = 0
+keyBox.ClearTextOnFocus = false
+
+-- Rounded corners for text box
+local keyBoxCorner = Instance.new("UICorner", keyBox)
+keyBoxCorner.CornerRadius = UDim.new(0, 8)
+
+-- Submit button (improved styling)
+local submitBtn = Instance.new("TextButton", frame)
+submitBtn.Size = UDim2.new(1, -40, 0, 35)
+submitBtn.Position = UDim2.new(0, 20, 0, 155)
+submitBtn.Text = "Submit Key"
+submitBtn.BackgroundColor3 = Color3.fromRGB(60, 150, 60)
+submitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+submitBtn.Font = Enum.Font.SourceSansBold
+submitBtn.TextSize = 16
+submitBtn.BorderSizePixel = 0
+
+-- Rounded corners for submit button
+local submitCorner = Instance.new("UICorner", submitBtn)
+submitCorner.CornerRadius = UDim.new(0, 8)
+
+-- Button hover effects
+local function createHoverEffect(button, hoverColor, originalColor)
+    button.MouseEnter:Connect(function()
+        local hoverTween = TweenService:Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = hoverColor}
+        )
+        hoverTween:Play()
+    end)
+    
+    button.MouseLeave:Connect(function()
+        local leaveTween = TweenService:Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = originalColor}
+        )
+        leaveTween:Play()
+    end)
+end
+
+-- Apply hover effects
+createHoverEffect(getKeyBtn, Color3.fromRGB(90, 150, 200), Color3.fromRGB(70, 130, 180))
+createHoverEffect(submitBtn, Color3.fromRGB(80, 170, 80), Color3.fromRGB(60, 150, 60))
+
+-- Button functionality
+getKeyBtn.MouseButton1Click:Connect(function()
+    setclipboard("https://lootdest.org/s?Si1CYuYP")
+    
+    -- Visual feedback
+    local originalText = getKeyBtn.Text
+    getKeyBtn.Text = "Copied link to Clipboard!"
+    wait(1.5)
+    getKeyBtn.Text = originalText
+end)
+
+submitBtn.MouseButton1Click:Connect(function()
+    local key = keyBox.Text
+    
+    -- Always show invalid key message
+    local originalText = submitBtn.Text
+    local originalColor = keyBox.BackgroundColor3
+    
+    submitBtn.Text = "Invalid key, Try again"
+    
+    -- Fade textbox to red
+    local redTween = TweenService:Create(
+        keyBox,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {BackgroundColor3 = Color3.fromRGB(150, 50, 50)}
+    )
+    
+    redTween:Play()
+    
+    -- Wait and fade back to original
+    wait(1)
+    
+    local normalTween = TweenService:Create(
+        keyBox,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {BackgroundColor3 = originalColor}
+    )
+    
+    normalTween:Play()
+    
+    -- Reset button text
+    wait(0.5)
+    submitBtn.Text = originalText
+end)
+
+-- Fade-in animation (slower)
+local fadeInTween = TweenService:Create(
+    frame,
+    TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    {BackgroundTransparency = 0}
+)
+
+local shadowFadeIn = TweenService:Create(
+    shadow,
+    TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    {BackgroundTransparency = 0.8}
+)
+
+-- Animation from top of screen (slower)
+frame.Position = UDim2.new(0.5, -200, 0, -220) -- Start above screen
+shadow.Position = UDim2.new(0.5, -198, 0, -218) -- Start above screen
+
+local slideInTween = TweenService:Create(
+    frame,
+    TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Position = UDim2.new(0.5, -200, 0.5, -110)}
+)
+
+local shadowSlideTween = TweenService:Create(
+    shadow,
+    TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Position = UDim2.new(0.5, -198, 0.5, -108)}
+)
+
+-- Play animations
+fadeInTween:Play()
+shadowFadeIn:Play()
+slideInTween:Play()
+shadowSlideTween:Play()
