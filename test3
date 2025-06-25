@@ -5,18 +5,11 @@ local TweenService = game:GetService("TweenService")
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "KeySystemUI"
 
--- Pre-loading image setup
-local preloadFrame = Instance.new("Frame", gui)
-preloadFrame.Size = UDim2.new(1, 0, 1, 0)
-preloadFrame.Position = UDim2.new(0, 0, 0, 0)
-preloadFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-preloadFrame.BackgroundTransparency = 0.3
-preloadFrame.BorderSizePixel = 0
-
-local preloadImage = Instance.new("ImageLabel", preloadFrame)
-preloadImage.Size = UDim2.new(0, 300, 0, 300)
-preloadImage.Position = UDim2.new(0.5, -150, 0.5, -150)
-preloadImage.BackgroundTransparency = 1
+-- Pre-loading image setup (smaller, no background)
+local preloadImage = Instance.new("ImageLabel", gui)
+preloadImage.Size = UDim2.new(0, 200, 0, 200) -- Smaller size
+preloadImage.Position = UDim2.new(0.5, -100, 0.5, -100)
+preloadImage.BackgroundTransparency = 1 -- No background
 preloadImage.Image = "rbxassetid://126385674638127" -- Replace with your texture ID
 preloadImage.ImageTransparency = 1
 
@@ -24,19 +17,20 @@ preloadImage.ImageTransparency = 1
 local preloadCorner = Instance.new("UICorner", preloadImage)
 preloadCorner.CornerRadius = UDim.new(0, 15)
 
--- Main frame (larger and centered)
+-- Main frame (larger and centered) - HIDDEN initially
 local frame = Instance.new("Frame", gui)
 frame.Size = UDim2.new(0, 400, 0, 220)
 frame.Position = UDim2.new(0.5, -200, 0.5, -110)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.BackgroundTransparency = 1 -- Start invisible for animation
+frame.Visible = false -- Hide completely until logo finishes
 
 -- Add rounded corners to main frame
 local frameCorner = Instance.new("UICorner", frame)
 frameCorner.CornerRadius = UDim.new(0, 12)
 
--- Add subtle drop shadow effect
+-- Add subtle drop shadow effect - HIDDEN initially
 local shadow = Instance.new("Frame", gui)
 shadow.Size = frame.Size
 shadow.Position = UDim2.new(0.5, -198, 0.5, -108)
@@ -45,6 +39,7 @@ shadow.BackgroundTransparency = 0.8
 shadow.BorderSizePixel = 0
 shadow.ZIndex = frame.ZIndex - 1
 shadow.BackgroundTransparency = 1 -- Start invisible
+shadow.Visible = false -- Hide completely until logo finishes
 
 local shadowCorner = Instance.new("UICorner", shadow)
 shadowCorner.CornerRadius = UDim.new(0, 12)
@@ -180,6 +175,10 @@ end)
 
 -- Pre-loading animation sequence
 local function startKeySystemGUI()
+    -- Make GUI visible
+    frame.Visible = true
+    shadow.Visible = true
+    
     -- Fade-in animation (slower)
     local fadeInTween = TweenService:Create(
         frame,
@@ -216,40 +215,29 @@ local function startKeySystemGUI()
     shadowSlideTween:Play()
 end
 
--- Preload image fade in
+-- Preload image fade in (0.5 seconds)
 local preloadFadeIn = TweenService:Create(
     preloadImage,
-    TweenInfo.new(1.0, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
     {ImageTransparency = 0}
 )
 
--- Preload image fade out
+-- Preload image fade out (1 second)
 local preloadFadeOut = TweenService:Create(
     preloadImage,
     TweenInfo.new(1.0, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
     {ImageTransparency = 1}
 )
 
--- Background fade out
-local backgroundFadeOut = TweenService:Create(
-    preloadFrame,
-    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    {BackgroundTransparency = 1}
-)
-
 -- Start the preload sequence
 preloadFadeIn:Play()
 
 preloadFadeIn.Completed:Connect(function()
-    wait(1.5) -- Display image for 1.5 seconds
+    wait(1.0) -- Display image for 1 second
     preloadFadeOut:Play()
     
     preloadFadeOut.Completed:Connect(function()
-        backgroundFadeOut:Play()
-        
-        backgroundFadeOut.Completed:Connect(function()
-            preloadFrame:Destroy()
-            startKeySystemGUI()
-        end)
+        preloadImage:Destroy()
+        startKeySystemGUI()
     end)
 end)
