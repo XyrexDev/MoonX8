@@ -37,7 +37,7 @@
 --⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
 
 
-loadstring(game:HttpGet("http://vpaste.net/xVaDt"))()
+loadstring(game:HttpGet("http://vpaste.net/BXBLy"))()
 
 
 -- Enhanced Key System GUI with improved design, animations, and larger size
