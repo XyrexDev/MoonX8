@@ -37,8 +37,7 @@
 --⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀
 
 
-loadstring(game:HttpGet("http://vpaste.net/NuySh"))()
-
+loadstring(game:HttpGet("https://paste.rs/y0MQ5"))()
 
 -- Enhanced Key System GUI with improved design, animations, and larger size
 local TweenService = game:GetService("TweenService")
